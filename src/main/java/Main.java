@@ -19,7 +19,7 @@ public class Main {
 		String registro = "avila#esta#1234#12";
 		StringTokenizer tokens = new StringTokenizer (registro,"#");
 		int cantTokens = tokens.countTokens();
-		int contCampo = 1;
+	//	int contCampo = 1;
 		int regNoProcesados = 0;
 		int regProcesados = 0;
 		
@@ -30,15 +30,15 @@ public class Main {
 				Empresa empresa = new Empresa();
 				Cuenta cuenta = new Cuenta();
 				while (tokens.hasMoreTokens()){
-						if (contCampo == 1){
+			//			if (contCampo == 1){
 							empresa.setNombreEmpresa(tokens.nextToken());
-							contCampo++;
-						}else {	
+				//			contCampo++;
+					//	}else {	
 							cuenta.setNombreCuenta(tokens.nextToken());
 							cuenta.setPeriodo(Integer.parseInt(tokens.nextToken()));
 							cuenta.setValor(Integer.parseInt(tokens.nextToken()));
 							
-						}
+				//		}
 					
 				}
 				

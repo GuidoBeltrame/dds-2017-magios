@@ -28,34 +28,31 @@ public class CargaDesdeArchivo {
 		while ((registro = b.readLine()) != null){
 			StringTokenizer tokens = new StringTokenizer (registro,"#");
 			int cantTokens = tokens.countTokens(); 
-			int contCampo = 1;
 			
 				if ((cantTokens <= 0) || (cantTokens > 4)){
-					regNoProcesados++;	
+					
+					regNoProcesados++;
+					
 				} else {
 					Empresa empresa = new Empresa();
 					Cuenta cuenta = new Cuenta();
+					
 					while (tokens.hasMoreTokens()){
-							if (contCampo == 1){
 								empresa.setNombreEmpresa(tokens.nextToken());
-								contCampo++;
-							}else {	
 								cuenta.setNombreCuenta(tokens.nextToken());
 								cuenta.setPeriodo(Integer.parseInt(tokens.nextToken()));
-								cuenta.setValor(Integer.parseInt(tokens.nextToken()));
-							}
-						
+								cuenta.setValor(Integer.parseInt(tokens.nextToken()));			
 					}
+					
 					empresa.agregarCuentas(cuenta);
 					regProcesados++;
 					
 				} 
 				
-			
-		}
+    	}
+	
 		b.close();
-		
-		
+			
 	}
 	
 	

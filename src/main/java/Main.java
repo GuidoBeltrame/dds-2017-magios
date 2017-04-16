@@ -1,4 +1,8 @@
+import java.util.ArrayList;
 import java.util.StringTokenizer;
+
+import primerEntrega.Cuenta;
+import primerEntrega.Empresa;
 
 
 public class Main {
@@ -23,27 +27,32 @@ public class Main {
 			if ((cantTokens <= 0) || (cantTokens > 4)){
 				regNoProcesados++;	
 			} else {
-			//	Empresa empresa = new Empresa();
-			//	Cuenta cuenta = new Cuenta();
+				Empresa empresa = new Empresa();
+				Cuenta cuenta = new Cuenta();
 				while (tokens.hasMoreTokens()){
 						if (contCampo == 1){
-						//	empresa.setNombreEmpresa(tokens.nextToken());
-							System.out.println(tokens.nextToken());
+							empresa.setNombreEmpresa(tokens.nextToken());
 							contCampo++;
 						}else {	
-						//	cuenta.setNombreCuenta(tokens.nextToken());
-						//	cuenta.setPeriodo(Integer.parseInt(tokens.nextToken()));
-						//	cuenta.setValor(Integer.parseInt(tokens.nextToken()));
-							System.out.println(tokens.nextToken());
-							System.out.println(tokens.nextToken());
-							System.out.println(tokens.nextToken());
+							cuenta.setNombreCuenta(tokens.nextToken());
+							cuenta.setPeriodo(Integer.parseInt(tokens.nextToken()));
+							cuenta.setValor(Integer.parseInt(tokens.nextToken()));
+							
 						}
 					
 				}
+				
+		
+				System.out.println(empresa.getNombreEmpresa());
+				empresa.agregarCuentas(cuenta);
+				System.out.println(empresa.getListaCuentas().size());
 				regProcesados++;
+				
 	}
 			System.out.println(regNoProcesados);
 			System.out.println(regProcesados); 
+			
+			
 }
 	
 }

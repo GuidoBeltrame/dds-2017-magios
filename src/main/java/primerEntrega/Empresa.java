@@ -6,6 +6,10 @@ public class Empresa {
 	private String nombreEmpresa;
 	private ArrayList <Cuenta> listaCuentas;
 	
+	public Empresa(){
+		this.listaCuentas = new ArrayList<Cuenta>();
+	}
+	
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
 	}
@@ -15,8 +19,13 @@ public class Empresa {
 	public ArrayList <Cuenta> getListaCuentas() {
 		return listaCuentas;
 	}
+	
+	public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
+		this.listaCuentas = listaCuentas;
+	}
+	
 	public void agregarCuentas(Cuenta cuenta) {
-		this.listaCuentas.add(cuenta);
+		this.getListaCuentas().add(cuenta);
 	}
 	
 	

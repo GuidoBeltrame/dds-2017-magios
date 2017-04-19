@@ -1,27 +1,27 @@
 package empresas;
 import java.io.FileReader;
+import java.util.Arrays;
 import com.opencsv.CSVReader;
-import empresas.RepoEmpresas;
+
 
 public class LectorCuentas {
 	
 	public static final char SEPARATOR = ',';
-	CSVReader reader = null;
-	RepoEmpresas repo = RepoEmpresas.getInstance();
+	private CSVReader reader = null;
 	
-	public void leerArchivo() throws Exception{
+	public LectorCuentas(){
+			
+		
+	}
+	
+	
+	public void mostrarCuentas(String path) throws Exception{
 		
 		try{
-			reader = new CSVReader(new FileReader("c:\\CargaArchivos.txt"),SEPARATOR);
+			reader = new CSVReader(new FileReader(path),SEPARATOR);
 			String [] nextLine = null;
-			
 		while ((nextLine = reader.readNext()) != null){
-			String nombreEmpresa = nextLine[0];
-			if(repo.existe(nombreEmpresa)){
-				
-				//Falta codear aca.				
-				
-			}
+			System.out.println(Arrays.toString(nextLine));
 			
 		}
 		}catch(Exception e){
@@ -34,6 +34,32 @@ public class LectorCuentas {
 		
 		
 	}
+
+
+
+public int cantidadDeCuentas(String path) throws Exception{
+	
+	int i = 0;
+	
+	try{
+		reader = new CSVReader(new FileReader(path),SEPARATOR);
+	while ((reader.readNext()) != null){
 		
+		i++;
+		
+	}
+		return i;
+	}catch(Exception e){
+		throw e;
+	}finally {
+		if(null != reader){
+			reader.close();
+		}
+	}
+	
+	
+}
+
 
 }
+

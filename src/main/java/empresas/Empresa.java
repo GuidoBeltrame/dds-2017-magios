@@ -1,5 +1,7 @@
-package primerEntrega;
+package empresas;
 import java.util.ArrayList;
+
+import cuentas.Cuenta;
 
 public class Empresa {
 	

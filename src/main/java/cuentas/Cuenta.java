@@ -1,4 +1,4 @@
-package primerEntrega;
+package cuentas;
 
 public class Cuenta {
 	

@@ -1,3 +1,0 @@
-empresa1,cuenta1,2017,50000
-empresa1,cuenta2,2017,30000
-empresa1,cuenta4,2017,30000

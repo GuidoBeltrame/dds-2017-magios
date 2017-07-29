@@ -9,11 +9,6 @@
 	<artifactId>dds.2017.k3252</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<properties>
-		<spring.version>4.3.6.RELEASE</spring.version>
-		<zk.spring.version>3.2.0</zk.spring.version>
-	</properties>
-	
 	<build>
 		<plugins>
 			<plugin>

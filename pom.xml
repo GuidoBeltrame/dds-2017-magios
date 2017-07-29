@@ -11,6 +11,7 @@
 
 	<properties>
 		<spring.version>4.3.6.RELEASE</spring.version>
+		<zk.spring.version>3.2.0</zk.spring.version>
 	</properties>
 	
 	<build>
@@ -60,100 +61,7 @@
 			<version>4.7</version>
 			<type>maven-plugin</type>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-logging</artifactId>
-					<groupId>commons-logging</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-redis</artifactId>
-			<version>1.8.0.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.zkoss.common/zcommon -->
-		<dependency>
-			<groupId>org.zkoss.common</groupId>
-			<artifactId>zcommon</artifactId>
-			<version>8.0.2.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.zkoss.common/zweb -->
-		<dependency>
-			<groupId>org.zkoss.common</groupId>
-			<artifactId>zweb</artifactId>
-			<version>8.0.2.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.zkoss.zk/zul -->
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zul</artifactId>
-			<version>8.0.2.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.zkoss.zk/zk -->
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zk</artifactId>
-			<version>8.0.2.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.zkoss.zk/zkplus -->
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkplus</artifactId>
-			<version>8.0.2.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.zkoss.zk/zhtml -->
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zhtml</artifactId>
-			<version>8.0.2.2</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.zkoss.zk/zkbind -->
-		<dependency>
-			<groupId>org.zkoss.zk</groupId>
-			<artifactId>zkbind</artifactId>
-			<version>8.0.2.2</version>
-		</dependency>
-		
 	</dependencies>
 
 </project>

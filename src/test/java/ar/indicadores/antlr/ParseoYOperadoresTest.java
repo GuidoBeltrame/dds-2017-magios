@@ -68,15 +68,15 @@ public class ParseoYOperadoresTest {
 
 		Assert.assertEquals(8, expresion.getResultado(), 0.01);
 		
-		indicador.setNombre(tree.getChild(0).getText());
-		indicador.setFormula(tree.getChild(2).getText());
-		indicador.setValor(expresion.getResultado());
+		//indicador.setNombre(tree.getChild(0).getText());
+		//indicador.setFormula(tree.getChild(2).getText());
+		//indicador.setValor(expresion.getResultado());
 	}
 
 	@Test
 	public void testGramaticaError() throws IOException {
 
-		IndicadoresLexer lexer = new IndicadoresLexer(new ANTLRInputStream("i_sgf = 1 -* 6 * (4 + -5) + 2 * 7"));
+		IndicadoresLexer lexer = new IndicadoresLexer(new ANTLRInputStream("1 -* 6 * (4 + -5) + 2 * 7"));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		IndicadoresParser parser = new IndicadoresParser(tokens);
 

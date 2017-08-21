@@ -1,6 +1,6 @@
 grammar Indicadores;
 
-indicador: INDICADOR IGUAL expresion EOF
+indicador: expresion EOF
          ;
 expresion: PARENIZQ expresion PARENDER                    #parenExpr
          | REST expresion                                 #negExpr

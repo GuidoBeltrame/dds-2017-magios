@@ -86,12 +86,12 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 		if (ctx.getText().startsWith("c")) {
 			//Es una cuenta
 			//Llamar a persistencia, con cuenta, empresa y a�o
-			//valor = obtenerCuenta(ctx.getText(), empresa, anio);
+			//valor = obtenerValorCuenta(ctx.getText(), empresa, anio);
 		}
 		if (ctx.getText().startsWith("i")) {
 				//Es Indicador
 				//Llamar a persistencia, con indicador, empresa y a�o
-				//valor = obtenerIndicador(ctx.getText(), empresa, anio);	
+				//valor = obtenerValorIndicador(ctx.getText(), empresa, anio);	
 		}
 		else
 		{

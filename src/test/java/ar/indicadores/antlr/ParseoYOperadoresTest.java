@@ -45,6 +45,7 @@ public class ParseoYOperadoresTest {
 		IndicadoresParser parser = new IndicadoresParser(tokens);
 
 		Indicador indicador = new Indicador();
+
 		ParseTree tree = parser.indicador();
 
 		VisitorExp visitor = new VisitorExp();
@@ -76,18 +77,17 @@ public class ParseoYOperadoresTest {
 			System.err.printf("ERROR: %s\n", errorListener.getErrorMessage());
 		}
 	}
-	
-	@Test (expected = Exception.class)
-	public void testErrorAlValidarFormula() throws Exception{
-		
+
+	@Test(expected = Exception.class)
+	public void testErrorAlValidarFormula() throws Exception {
+
 		String formulaErronea = "1 -* 2";
-		
+
 		Validador validador = new Validador();
-		
+
 		validador.validarFormula(formulaErronea);
-		
+
 	}
-	
 
 	private String getInputFilePath() {
 		return this.getClass().getResource(INPUT_PATH).getPath();

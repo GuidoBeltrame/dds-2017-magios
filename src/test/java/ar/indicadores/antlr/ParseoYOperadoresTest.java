@@ -40,37 +40,18 @@ public class ParseoYOperadoresTest {
 
 		// ---- Esto es para evaluar una gramatica y crear expresiones
 		IndicadoresLexer lexer = new IndicadoresLexer(new ANTLRFileStream(file));
-		
+
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		IndicadoresParser parser = new IndicadoresParser(tokens);
 
-		// IndicadoresParser.ListaIndicadoresContext indicadorContext =
-		// parser.listaIndicadores();
-		// IndicadoresParser.IndicadorContext indicadorContext =
-		// parser.indicador();
-		// for(int i = 0; i < indicadorContext.getChildCount(); i++) {
-		//
-		// ParseTree child = indicadorContext.getChild(i);
-		//
-		// String nombre = child.getText().split("=")[0];
-		// String formula = child.getText().split("=")[1];
-		// System.out.printf("indicador: %s = %s", nombre, formula);
-		// }
-
-		Indicador indicador = new Indicador();		
+		Indicador indicador = new Indicador();
 		ParseTree tree = parser.indicador();
-
-		// VisitorResult visitor = new VisitorResult();
-		// double resultado = visitor.visit(tree);
 
 		VisitorExp visitor = new VisitorExp();
 		IExpresion expresion = visitor.visit(tree);
 
 		Assert.assertEquals(8, expresion.getResultado(), 0.01);
-		
-		//indicador.setNombre(tree.getChild(0).getText());
-		//indicador.setFormula(tree.getChild(2).getText());
-		//indicador.setValor(expresion.getResultado());
+
 	}
 
 	@Test
@@ -82,7 +63,7 @@ public class ParseoYOperadoresTest {
 
 		final FormatoInvalidoErrorListener errorListener = new FormatoInvalidoErrorListener();
 
-		lexer.addErrorListener(errorListener);										 
+		lexer.addErrorListener(errorListener);
 		parser.addErrorListener(errorListener);
 
 		try {
@@ -91,11 +72,22 @@ public class ParseoYOperadoresTest {
 			if (!errorListener.getErrorMessage().isEmpty()) {
 				throw new ParseCancellationException(errorListener.getErrorMessage());
 			}
-		}
-		catch (ParseCancellationException  e) {
+		} catch (ParseCancellationException e) {
 			System.err.printf("ERROR: %s\n", errorListener.getErrorMessage());
 		}
 	}
+	
+	@Test (expected = Exception.class)
+	public void testErrorAlValidarFormula() throws Exception{
+		
+		String formulaErronea = "1 -* 2";
+		
+		Validador validador = new Validador();
+		
+		validador.validarFormula(formulaErronea);
+		
+	}
+	
 
 	private String getInputFilePath() {
 		return this.getClass().getResource(INPUT_PATH).getPath();

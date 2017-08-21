@@ -9,9 +9,17 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 
 	private Map<String, IOperador> operadores;
 	private IExpresion expresionActual;
-
+	private int empresa;
+	private int anio;
+	
 	public VisitorExp() {
 
+		this.cargarOperadores();
+	}
+
+	public VisitorExp(int empresa, int anio) {
+		this.anio = anio;	
+		this.empresa = empresa;
 		this.cargarOperadores();
 	}
 	
@@ -73,13 +81,47 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 	public IExpresion visitTermino(IndicadoresParser.TerminoContext ctx) { 
 		System.out.println(ctx.getText());
 
-		return new Termino(Double.valueOf(ctx.getText()));
+		double valor = 0;
+		
+		if (ctx.getText().startsWith("c")) {
+			//Es una cuenta
+			//Llamar a persistencia, con cuenta, empresa y año
+			valor = obtenerCuenta(ctx.getText(), empresa, anio);
+		}
+		if (ctx.getText().startsWith("i")) {
+				//Es Indicador
+				//Llamar a persistencia, con indicador, empresa y año
+				valor = obtenerIndicador(ctx.getText(), empresa, anio);	
+		}
+		else
+		{
+			valor = Double.valueOf(ctx.getText());
+		}
+		
+		return new Termino(valor);
 	}
 	
 	@Override
 	public IExpresion visitAtomExpr(IndicadoresParser.AtomExprContext ctx) { 
 		System.out.println(ctx.getText());
 		
-		return new Termino(Double.valueOf(ctx.getText()));
+		double valor = 0;
+		
+		if (ctx.getText().startsWith("c")) {
+			//Es una cuenta
+			//Llamar a persistencia, con cuenta, empresa y año
+			valor = obtenerCuenta(ctx.getText(), empresa, anio);
+		}
+		if (ctx.getText().startsWith("i")) {
+				//Es Indicador
+				//Llamar a persistencia, con indicador, empresa y año
+				valor = obtenerIndicador(ctx.getText(), empresa, anio);	
+		}
+		else
+		{
+			valor = Double.valueOf(ctx.getText());
+		}
+		
+		return new Termino(valor);
 	}
 }

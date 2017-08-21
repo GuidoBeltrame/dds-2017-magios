@@ -30,7 +30,7 @@ public class Indicador implements IExpresion {
 		this.formula = formula;
 	}
 
-	public double getResultado() {
+	public double getResultado(int empresa, int anio) {
 
 		// Tomo el dato de la formula para calcular
 		String form = this.formula;
@@ -48,7 +48,7 @@ public class Indicador implements IExpresion {
 		ParseTree tree = parser.indicador();
 		
 		//Creo el visitor para recorrer
-		VisitorExp visitor = new VisitorExp();
+		VisitorExp visitor = new VisitorExp(empresa, anio);
 		
 		//Obtengo la expresion a partir del visitor 
 		IExpresion expresion = visitor.visit(tree);

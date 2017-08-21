@@ -57,7 +57,7 @@ public class ParseoYOperadoresTest {
 		// System.out.printf("indicador: %s = %s", nombre, formula);
 		// }
 
-		Indicador indicador = new Indicador();		
+		//Indicador indicador = new Indicador();		
 		ParseTree tree = parser.indicador();
 
 		// VisitorResult visitor = new VisitorResult();

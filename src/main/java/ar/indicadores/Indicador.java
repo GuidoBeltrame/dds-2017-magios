@@ -1,15 +1,12 @@
 package ar.indicadores;
 
-import java.io.IOException;
-
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-
 import ar.indicadores.antlr.VisitorExp;
 
 @SuppressWarnings("deprecation")
-public class Indicador implements IExpresion {
+public class Indicador {
 
 	private String nombre;
 	private String formula;
@@ -47,10 +44,10 @@ public class Indicador implements IExpresion {
 		// Creo el arbol para el indicador
 		ParseTree tree = parser.indicador();
 
-		//Creo el visitor para recorrer
+		// Creo el visitor para recorrer
 		VisitorExp visitor = new VisitorExp(empresa, anio);
-		
-		//Obtengo la expresion a partir del visitor 
+
+		// Obtengo la expresion a partir del visitor
 
 		IExpresion expresion = visitor.visit(tree);
 

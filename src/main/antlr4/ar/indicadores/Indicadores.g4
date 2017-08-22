@@ -9,7 +9,7 @@ expresion: PARENIZQ expresion PARENDER                    #parenExpr
          | termino                                        #atomExpr
          ;
 termino: NUMERO
-       | CONSTANTE
+       | CUENTA
        | EXPALG 
        | INDICADOR
 	   ;
@@ -19,7 +19,7 @@ IGUAL: '=' ;
 PARENIZQ: '(' ;
 PARENDER: ')' ;
 NUMERO: [0-9]+(.[0-9][0-9]?)? ;
-CONSTANTE: 'c_'[a-zA-Z]+ ;
+CUENTA: 'c_'[a-zA-Z]+ ;
 EXPALG: 'exp_'[a-zA-Z]+ ;
 INDICADOR: 'i_'[a-zA-Z]+ ;
 SUM: '+' ;

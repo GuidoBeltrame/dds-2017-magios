@@ -51,8 +51,7 @@ public class ParseoYOperadoresTest {
 		VisitorExp visitor = new VisitorExp();
 		IExpresion expresion = visitor.visit(tree);
 
-		Assert.assertEquals(8, expresion.getResultado(), 0.01);
-
+		Assert.assertEquals(36, expresion.getResultado(), 0.01);
 	}
 
 	@Test

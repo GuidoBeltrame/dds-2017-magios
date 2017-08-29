@@ -1,34 +1,38 @@
 package empresas;
+
 import java.util.ArrayList;
 
-import cuentas.Cuenta;
+import ar.Balances.Balance;
 
 public class Empresa {
-	
+
 	private String nombreEmpresa;
-	private ArrayList <Cuenta> listaCuentas;
-	
-	public Empresa(){
-		this.listaCuentas = new ArrayList<Cuenta>();
+	private ArrayList<Balance> balances;
+
+	public Empresa(String n) {
+
+		this.nombreEmpresa = n;
+		this.balances = new ArrayList<Balance>();
 	}
-	
+
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
 	}
+
 	public void setNombreEmpresa(String nombreEmpresa) {
 		this.nombreEmpresa = nombreEmpresa;
 	}
-	public ArrayList <Cuenta> getListaCuentas() {
-		return listaCuentas;
+
+	public ArrayList<Balance> getBalances() {
+		return balances;
 	}
-	
-	public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
-		this.listaCuentas = listaCuentas;
+
+	public void setBalances(ArrayList<Balance> bals) {
+		this.balances = bals;
 	}
-	
-	public void agregarCuentas(Cuenta cuenta) {
-		this.getListaCuentas().add(cuenta);
+
+	public void agregarBalance(Balance bal) {
+		this.balances.add(bal);
 	}
-	
-	
+
 }

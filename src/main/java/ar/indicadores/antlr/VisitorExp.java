@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ar.indicadores.*;
+import empresas.Empresa;
 
 public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 
 	private Map<String, IOperador> operadores;
 	private IExpresion expresionActual;
-	private int empresa;
+	private Empresa empresa;
 	private int anio;
 	
 	public VisitorExp() {
@@ -17,7 +18,7 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 		this.cargarOperadores();
 	}
 
-	public VisitorExp(int empresa, int anio) {
+	public VisitorExp(Empresa empresa, int anio) {
 		this.anio = anio;	
 		this.empresa = empresa;
 		this.cargarOperadores();

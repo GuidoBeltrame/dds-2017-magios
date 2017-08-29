@@ -5,13 +5,13 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Assert;
 import org.junit.Test;
 import ar.indicadores.*;
 
 import java.io.IOException;
 
+@SuppressWarnings("deprecation")
 public class ParseoYOperadoresTest {
 
 	public static final String INPUT_PATH = "/input.txt";
@@ -44,8 +44,6 @@ public class ParseoYOperadoresTest {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		IndicadoresParser parser = new IndicadoresParser(tokens);
 
-		Indicador indicador = new Indicador();
-
 		ParseTree tree = parser.indicador();
 
 		VisitorExp visitor = new VisitorExp();
@@ -68,6 +66,7 @@ public class ParseoYOperadoresTest {
 		parser.addErrorListener(errorListener);
 
 		try {
+			@SuppressWarnings("unused")
 			ParseTree tree = parser.indicador();
 
 			if (!errorListener.getErrorMessage().isEmpty()) {
@@ -78,14 +77,11 @@ public class ParseoYOperadoresTest {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	@Test(expected = Exception.class)
 	public void testErrorAlValidarFormula() throws Exception {
 
-		String formulaErronea = "1 -* 2";
-
-		Validador validador = new Validador();
-
-		validador.validarFormula(formulaErronea);
+		IndicadorPropio indicadorNoValido = new IndicadorPropio("Indicador Erroneo", "1 -* 2");
 
 	}
 

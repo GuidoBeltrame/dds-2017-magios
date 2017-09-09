@@ -2,7 +2,6 @@ package ar.indicadores.antlr;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import ar.indicadores.*;
 import empresas.Empresa;
 
@@ -12,18 +11,18 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 	private IExpresion expresionActual;
 	private Empresa empresa;
 	private int anio;
-	
+
 	public VisitorExp() {
 
 		this.cargarOperadores();
 	}
 
-	public VisitorExp(Empresa empresa, int anio) {
-		this.anio = anio;	
+	public VisitorExp(Empresa  empresa, int anio) {
+		this.anio = anio;
 		this.empresa = empresa;
 		this.cargarOperadores();
 	}
-	
+
 	private void cargarOperadores() {
 		IOperador sumar = new OperadorSUM();
 		IOperador restar = new OperadorRES();
@@ -36,93 +35,118 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 		this.operadores.put(multiplicar.getSimbolo(), multiplicar);
 		this.operadores.put(dividir.getSimbolo(), dividir);
 	}
-	
+
 	@Override
 	public IExpresion visitIndicador(IndicadoresParser.IndicadorContext ctx) {
 
 		System.out.println(ctx.getText());
-		
+
 		this.expresionActual = this.visit(ctx.expresion());
-		
-		return this.expresionActual; 
+
+		return this.expresionActual;
 	}
 
 	@Override
-    public IExpresion visitOpExpr(IndicadoresParser.OpExprContext ctx) {
-		
-		System.out.println(ctx.getText());
-		
-		IExpresion left = visit(ctx.left);;
-		IExpresion right = visit(ctx.right);
-        String op = ctx.op.getText();
+	public IExpresion visitOpExpr(IndicadoresParser.OpExprContext ctx) {
 
-        Expresion expresion = new Expresion(); 
-        expresion.setExpresion1(left);
+		System.out.println(ctx.getText());
+
+		IExpresion left = visit(ctx.left);
+		IExpresion right = visit(ctx.right);
+		String op = ctx.op.getText();
+
+		Expresion expresion = new Expresion();
+		expresion.setExpresion1(left);
 		expresion.setOperador(operadores.get(op));
 		expresion.setExpresion2(right);
 
-        return expresion;
-    }
-	
-	@Override 
-	public IExpresion visitNegExpr(IndicadoresParser.NegExprContext ctx) {
-		System.out.println(ctx.getText());
-		
-		return new Termino(Double.valueOf(ctx.getText()));
+		return expresion;
 	}
-	
+
 	@Override
-    public IExpresion visitParenExpr(IndicadoresParser.ParenExprContext ctx) {
-		System.out.println(ctx.getText());
-		
-        return this.visit(ctx.expresion());
-    }
-	
-	@Override
-	public IExpresion visitTermino(IndicadoresParser.TerminoContext ctx) { 
+	public IExpresion visitNegExpr(IndicadoresParser.NegExprContext ctx) {
 		System.out.println(ctx.getText());
 
 		double valor = 0;
-		
-		if (ctx.getText().startsWith("c")) {
-			//Es una cuenta
-			//Llamar a persistencia, con cuenta, empresa y a�o
-			//valor = obtenerCuenta(ctx.getText(), empresa, anio);
+
+		if (ctx.getText().startsWith("-c")) {
+			// Es una Cuenta
+			valor = (-1) * obtenerValorCuenta(ctx.getText().split("-")[1], empresa, anio);
+		} else {
+			if (ctx.getText().startsWith("-i")) {
+				// Es un Indicador
+				valor = (-1) * obtenerValorIndicador(ctx.getText().split("-")[1], empresa, anio);
+			} else {
+				valor = Double.valueOf(ctx.getText());
+			}
 		}
-		if (ctx.getText().startsWith("i")) {
-				//Es Indicador
-				//Llamar a persistencia, con indicador, empresa y a�o
-				//valor = obtenerIndicador(ctx.getText(), empresa, anio);	
-		}
-		else
-		{
-			valor = Double.valueOf(ctx.getText());
-		}
-		
+
 		return new Termino(valor);
 	}
-	
+
 	@Override
-	public IExpresion visitAtomExpr(IndicadoresParser.AtomExprContext ctx) { 
+	public IExpresion visitParenExpr(IndicadoresParser.ParenExprContext ctx) {
 		System.out.println(ctx.getText());
-		
+
+		return this.visit(ctx.expresion());
+	}
+
+	@Override
+	public IExpresion visitTermino(IndicadoresParser.TerminoContext ctx) {
+		System.out.println(ctx.getText());
+
 		double valor = 0;
-		
+
 		if (ctx.getText().startsWith("c")) {
-			//Es una cuenta
-			//Llamar a persistencia, con cuenta, empresa y a�o
-			//valor = obtenerValorCuenta(ctx.getText(), empresa, anio);
+			// Es una Cuenta
+			valor = obtenerValorCuenta(ctx.getText(), empresa, anio);
+		} else {
+			if (ctx.getText().startsWith("i")) {
+				// Es un Indicador
+				valor = obtenerValorIndicador(ctx.getText(), empresa, anio);
+			} else {
+				valor = Double.valueOf(ctx.getText());
+			}
 		}
-		if (ctx.getText().startsWith("i")) {
-			//Es Indicador
-			//Llamar a persistencia, con indicador, empresa y a�o
-			//valor = obtenerValorIndicador(ctx.getText(), empresa, anio);	
-		}
-		else
-		{
-			valor = Double.valueOf(ctx.getText());
-		}
-		
+
 		return new Termino(valor);
+	}
+
+	@Override
+	public IExpresion visitAtomExpr(IndicadoresParser.AtomExprContext ctx) {
+		System.out.println(ctx.getText());
+
+		double valor = 0;
+
+		if (ctx.getText().startsWith("c")) {
+			// Es una Cuenta
+			valor = obtenerValorCuenta(ctx.getText(), empresa, anio);
+		} else {
+			if (ctx.getText().startsWith("i")) {
+				// Es un Indicador
+				valor = obtenerValorIndicador(ctx.getText(), empresa, anio);
+			} else {
+				valor = Double.valueOf(ctx.getText());
+			}
+		}
+
+		return new Termino(valor);
+	}
+
+	private double obtenerValorIndicador(String codIndicador, Empresa empresa, int anio) {
+
+		// Llamar a persistencia, con codIndicador
+		// String formula = obtenerFormulaIndicador(codIndicador);
+
+		IndicadorPropio indicador = new IndicadorPropio("Indicador Propio 1", "1+2");
+
+		return indicador.getResultado(empresa, anio);
+	}
+
+	private double obtenerValorCuenta(String codCuenta, Empresa empresa, int anio) {
+
+		// Llamar a persistencia, con codCuenta, empresa y a�o
+		// return obtenerValorCuenta(codCuenta, empresa, anio);
+		return 6;
 	}
 }

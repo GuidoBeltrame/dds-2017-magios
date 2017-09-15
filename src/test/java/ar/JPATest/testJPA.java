@@ -37,10 +37,11 @@ public class testJPA {
 		
 		
 		Empresa empresa = new Empresa();
-		empresa.setNombre("IBM");
+		empresa.setNombre("IBM8");
 
 		repositorio.empresas().persistir(empresa);
-		
+
+		//Empresa empresa2 = repositorio.empresas().buscarPorId(1L);
 		
 		Indicador indicador = new Indicador();
 		indicador.setNombre("Indicador Ejemplo");
@@ -59,6 +60,7 @@ public class testJPA {
 		balance.setPeriodo(2016);
 		balance.setComuna(cuenta);
 		balance.setEmpresa(empresa);
+		//balance.setEmpresa(empresa2);
 		
 		repositorio.balances().persistir(balance);
 	}

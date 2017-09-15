@@ -1,12 +1,15 @@
 package ar.entidades;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,8 +22,8 @@ public class Empresa implements Serializable {
 	private Long idEmpresa;
 	private String nombre;
 
-	@OneToOne(mappedBy = "empresa")
-	private Balance balance;
+	@OneToMany(mappedBy = "empresa")
+	private Set<Balance> balances;
 	
 	public Empresa() {
 	}
@@ -47,11 +50,18 @@ public class Empresa implements Serializable {
 		return getIdEmpresa() + "-" + getNombre();
 	}
 	
-	public Balance getBalance() {
-		return balance;
+	public Set<Balance> getBalances() {
+		return balances;
 	}
 
-	public void setBalance(Balance balance) {
-		this.balance = balance;
+	public void setPois(Set<Balance> balances) {
+		this.balances = balances;
+	}
+
+	public void addBalance(Balance balance) {
+		if (balances == null) {
+			balances = new HashSet<Balance>();
+		}
+		balances.add(balance);
 	}
 }

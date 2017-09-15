@@ -25,7 +25,7 @@ public class Balance implements Serializable{
 	@JoinColumn(name = "idCuenta", referencedColumnName = "idCuenta")
 	private Cuenta cuenta;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idEmpresa", referencedColumnName = "idEmpresa")
 	private Empresa empresa;
 	

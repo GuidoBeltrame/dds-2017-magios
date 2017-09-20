@@ -30,8 +30,6 @@ public class testJPA {
 	public void aPersistir() {
 		Cuenta cuenta = new Cuenta();
 		cuenta.setNombre("EBIDTA");
-		//cuenta.setValor(14870000000L);
-		//cuenta.setPeriodo(2016);
 
 		repositorio.cuentas().persistir(cuenta);
 		

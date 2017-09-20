@@ -30,7 +30,9 @@ public class Balance implements Serializable{
 	private Empresa empresa;
 	
 	private int periodo;
-
+	
+	private long valor;
+	
 	public Balance() {
 	}
 
@@ -65,5 +67,13 @@ public class Balance implements Serializable{
 
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
+	}
+
+	public long getValor() {
+		return valor;
+	}
+
+	public void setValor(long valor) {
+		this.valor = valor;
 	}
 }

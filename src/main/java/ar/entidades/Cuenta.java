@@ -21,8 +21,6 @@ public class Cuenta implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCuenta;
 	private String nombre;
-	private long valor;
-	private int periodo;
 
 	@OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
 	private Set<Balance> balances;
@@ -47,22 +45,7 @@ public class Cuenta implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public long getValor() {
-		return valor;
-	}
 
-	public void setValor(long valor) {
-		this.valor = valor;
-	}
-
-	public int getPeriodo() {
-		return periodo;
-	}
-
-	public void setPeriodo(int periodo) {
-		this.periodo = periodo;
-	}
-	
 	public String toString() {
 		return getIdCuenta() + "-" + getNombre();
 	}
@@ -71,7 +54,7 @@ public class Cuenta implements Serializable{
 		return balances;
 	}
 
-	public void setPois(Set<Balance> balances) {
+	public void setBalances(Set<Balance> balances) {
 		this.balances = balances;
 	}
 

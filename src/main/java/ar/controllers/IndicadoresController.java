@@ -100,9 +100,5 @@ public class IndicadoresController {
 	    mv.addObject("listaIndicadores", lista);
 
 	    return mv;
-
-	    //Map<String, Object> model = new HashMap<String, Object>();
-	    //model.put("listaIndicadores", lista);
-	    //return new ModelAndView("indicadores", model);
 	}
 }

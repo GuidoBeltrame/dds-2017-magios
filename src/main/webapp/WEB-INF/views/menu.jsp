@@ -37,7 +37,17 @@
 	          Cuentas
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="dropDownCuentas">
+	          <a class="dropdown-item" href="#">Cargar Cuentas</a>
 	          <a class="dropdown-item" href="#">Ver Cuentas</a>
+	        </div>
+	      </li>
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" id="dropDownEmpresas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Empresas
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="dropDownEmpresas">
+	          <a class="dropdown-item" href="#">Cargar Empresas</a>
+	          <a class="dropdown-item" href="#">Ver Empresas</a>
 	        </div>
 	      </li>
 	      <li class="nav-item dropdown">

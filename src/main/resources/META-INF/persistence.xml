@@ -13,6 +13,7 @@
 		<class>ar.entidades.Indicador</class>
 		<class>ar.entidades.Empresa</class>
 		<class>ar.entidades.Balance</class>
+		<class>ar.entidades.Usuario</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

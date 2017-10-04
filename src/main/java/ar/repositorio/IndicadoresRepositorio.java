@@ -1,6 +1,9 @@
 package ar.repositorio;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import ar.entidades.Indicador;
 
@@ -18,5 +21,10 @@ public class IndicadoresRepositorio extends Repositorio{
 		em.getTransaction().begin();
 		em.persist(indicador);
 		em.getTransaction().commit();
+	}
+	
+	public List<Indicador> getIndicadores() {
+		Query query = em.createQuery("SELECT i FROM Indicador i");
+		return query.getResultList();
 	}
 }

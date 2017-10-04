@@ -1,6 +1,9 @@
 package ar.controllers;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,11 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.entidades.Indicador;
 import ar.repositorio.IndicadoresRepositorio;
-import ar.repositorio.Repositorio;
 
 @Controller
 public class IndicadoresController {
@@ -23,6 +26,12 @@ public class IndicadoresController {
 	private static final String PERSISTENCE_UNIT_NAME = "DB_MAGIOS";
 	private EntityManagerFactory emFactory;
 	private IndicadoresRepositorio indicadoresRepositorio;
+	
+	public IndicadoresController() 
+	{
+		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		indicadoresRepositorio = new IndicadoresRepositorio(emFactory.createEntityManager());
+	}
 	
 	@RequestMapping(value = "/indicadores")
 	public ModelAndView indicadores() {
@@ -43,13 +52,13 @@ public class IndicadoresController {
 	@RequestMapping(value = "/validarIndicador")
 	protected ModelAndView validarIndicador(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("crearIndicador");
 		
 		String nombre = request.getParameter("nombre");
 		String formula = request.getParameter("formula");
-		
+
 		Indicador indicador = new Indicador();
 		indicador.setNombre(nombre);
 		indicador.setFormula(formula);
@@ -73,12 +82,27 @@ public class IndicadoresController {
 	
 	private void GuardarIndicador(Indicador indicador) {
 		
-		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-		indicadoresRepositorio = new IndicadoresRepositorio(emFactory.createEntityManager());
-
+		//emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		//indicadoresRepositorio = new IndicadoresRepositorio(emFactory.createEntityManager());
+		
 		indicadoresRepositorio.persistir(indicador);
 		
 		indicadoresRepositorio.cerrar();
 		emFactory.close();
+	}
+	
+	@RequestMapping(value = { "/indicadores" }, method = RequestMethod.GET)
+	public ModelAndView getIndicadores() {
+
+	    List<Indicador> lista = indicadoresRepositorio.getIndicadores();
+	    ModelAndView mv = new ModelAndView("indicadores");
+	    
+	    mv.addObject("listaIndicadores", lista);
+
+	    return mv;
+
+	    //Map<String, Object> model = new HashMap<String, Object>();
+	    //model.put("listaIndicadores", lista);
+	    //return new ModelAndView("indicadores", model);
 	}
 }

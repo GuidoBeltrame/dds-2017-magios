@@ -58,9 +58,9 @@ public class Indicador implements Serializable{
 		this.formula = formula;
 	}
 	
-	public String toString() {
-		return getIdIndicador() + "-" + getNombre();
-	}
+//	public String toString() {
+//		return getIdIndicador() + "-" + getNombre();
+//	}
 	
 	public void validarFormula() {
 

@@ -72,9 +72,15 @@
 				 placeholder="Fórmula" name="formula" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Aceptar</button>
-			<button type="button" class="btn btn-outline-primary">Cancelar</button>
+			<button type="button" class="btn btn-outline-primary" onclick="closeCreate()">Cancelar</button>		
 		</form>
 	</div>
 </body>
+
+<script type="text/javascript">
+	function closeCreate() {
+		window.location.href = "./menu";
+	}
+</script>
 
 </html>

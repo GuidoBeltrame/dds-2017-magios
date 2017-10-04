@@ -77,6 +77,11 @@
 			<version>2.5</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+		  <groupId>jstl</groupId>
+		  <artifactId>jstl</artifactId>
+		  <version>1.2</version>
+		</dependency>
 	</dependencies>
 
 </project>

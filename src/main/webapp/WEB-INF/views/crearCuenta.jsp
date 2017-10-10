@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Crear Indicador</title>
+	<title>Crear Cuenta</title>
 </head>
 
 <body style="padding-top:0px;">
@@ -11,19 +11,14 @@
 	<jsp:include page="_partialMenu.jsp" />
 
 	<div class="container col-sm-4 col-md-4 col-lg-4">
-		<h2>CREAR INDICADOR</h2>
-		<form action="validarIndicador" method="post">
+		<h2>CREAR CUENTA</h2>
+		<form action="validarCuenta" method="post">
 			<label for="error" class="alert-danger">${error}</label>
 			<label for="ok" class="alert-warning">${ok}</label>
 			<div class="form-group">
 				<label for="nombre">Nombre:</label> 
 				<input type="text" class="form-control" id="nombre" 
 				 placeholder="Nombre" name="nombre" required>
-			</div>
-			<div class="form-group">
-				<label for="formula">Fórmula:</label>
-				<input type="text" class="form-control" id="formula" 
-				 placeholder="Fórmula" name="formula" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Aceptar</button>
 			<button type="button" class="btn btn-outline-primary" onclick="closeCreate()">Cancelar</button>		

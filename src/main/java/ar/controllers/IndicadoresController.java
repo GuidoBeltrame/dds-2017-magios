@@ -87,8 +87,8 @@ public class IndicadoresController {
 		
 		indicadoresRepositorio.persistir(indicador);
 		
-		indicadoresRepositorio.cerrar();
-		emFactory.close();
+		//indicadoresRepositorio.cerrar();
+		//emFactory.close();
 	}
 	
 	@RequestMapping(value = { "/indicadores" }, method = RequestMethod.GET)

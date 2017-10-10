@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Indicadores</title>
+	<title>Cuentas</title>
 </head>
 
 <body style="padding-top:0px;">
@@ -12,20 +12,18 @@
 	<jsp:include page="_partialMenu.jsp" />
 	
 	<div class="container">
-		<h2>Lista Indicadores</h2>
+		<h2>Lista Cuentas</h2>
 		<p>
-	        <a class="nav-link" href="./crearIndicador">Crear Indicador<span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="./crearCuenta">Crear Cuenta<span class="sr-only">(current)</span></a>
 		</p>
 		<table class="table">
 		    <tr>
-		        <th>Indicador</th>
-		        <th>Valor / Fórmula</th>		
+		        <th>Nombre</th>	
 		    </tr>
 		       
-			<c:forEach var="list" items="${listaIndicadores}">
+			<c:forEach var="list" items="${listaCuentas}">
 				<tr>
 			        <td>${list.nombre}</td>
-                	<td>${list.formula}</td>
             	</tr>
 			</c:forEach>
 		</table>

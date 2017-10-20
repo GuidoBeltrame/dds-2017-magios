@@ -1,7 +1,9 @@
 package ar.repositorio;
 
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.TypedQuery;
 
 import ar.entidades.Usuario;
@@ -26,10 +28,16 @@ public class UsuariosRepositorio extends Repositorio {
 	public Usuario buscarUsuarioPorUsername(String username) {
 	
 		try {
-			TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :user", Usuario.class);
+			//TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.username = :user", Usuario.class);
 		
-			query.setParameter("user", username);
-			return query.getSingleResult();
+			StoredProcedureQuery query = em.createStoredProcedureQuery("GET_USER", Usuario.class)
+				.registerStoredProcedureParameter("user", String.class, ParameterMode.IN)
+				.setParameter("user", username);
+				 
+			query.execute();
+				
+			//query.setParameter("user", username);
+			return (Usuario) query.getSingleResult();
 		}
 		catch (Exception ex) {
 			return null;

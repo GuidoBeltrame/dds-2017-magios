@@ -12,6 +12,7 @@
 		<class>ar.entidades.Cuenta</class>
 		<class>ar.entidades.Indicador</class>
 		<class>ar.entidades.Empresa</class>
+		<class>ar.entidades.Metodologia</class>
 		<class>ar.entidades.Balance</class>
 		<class>ar.entidades.Usuario</class>
 

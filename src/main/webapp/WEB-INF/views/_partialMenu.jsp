@@ -47,8 +47,8 @@
 	          Metodologías
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="dropDownMetodologias">
-	          <a class="dropdown-item" href="#">Crear Metodología</a>
-	          <a class="dropdown-item" href="#">Ver Metodologías</a>
+	          <a class="dropdown-item" href="./crearMetodologia">Crear Metodología</a>
+	          <a class="dropdown-item" href="./metodologias">Ver Metodologías</a>
 	        </div>
 	      </li>
 	      <li class="nav-item dropdown">

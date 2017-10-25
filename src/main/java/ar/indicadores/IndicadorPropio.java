@@ -43,7 +43,7 @@ public class IndicadorPropio extends Indicador {
 		ParseTree tree = parser.indicador();
 
 		// Creo el visitor para recorrer
-		VisitorExp visitor = new VisitorExp(empresa, anio);
+		VisitorExp visitor = new VisitorExp(1L, anio);
 
 		// Obtengo la expresion a partir del visitor
 

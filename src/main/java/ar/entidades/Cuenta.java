@@ -21,6 +21,7 @@ public class Cuenta implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCuenta;
 	private String nombre;
+	private String identificador;
 
 	@OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
 	private Set<Balance> balances;
@@ -46,6 +47,15 @@ public class Cuenta implements Serializable{
 		this.nombre = nombre;
 	}
 
+	@Column(name = "identificador")
+	public String getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
+	
 	public String toString() {
 		return getIdCuenta() + "-" + getNombre();
 	}

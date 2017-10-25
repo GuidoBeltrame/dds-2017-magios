@@ -55,9 +55,13 @@ public class CuentasController {
 		mv.setViewName("crearCuenta");
 		
 		String nombre = request.getParameter("nombre");
-
+		
+		//Concateno c_ y elimino los espacios
+		String identificador = "c_"+ nombre.replace(" ", "");
+		
 		Cuenta cuenta = new Cuenta();
 		cuenta.setNombre(nombre);
+		cuenta.setIdentificador(identificador);
 		
 		try {
 			if (!BuscarCuenta(nombre)) {

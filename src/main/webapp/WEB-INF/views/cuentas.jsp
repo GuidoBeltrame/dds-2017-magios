@@ -19,11 +19,13 @@
 		<table class="table">
 		    <tr>
 		        <th>Nombre</th>	
+		        <th>Indentificador</th>
 		    </tr>
 		       
 			<c:forEach var="list" items="${listaCuentas}">
 				<tr>
 			        <td>${list.nombre}</td>
+			        <td>${list.identificador}</td>
             	</tr>
 			</c:forEach>
 		</table>

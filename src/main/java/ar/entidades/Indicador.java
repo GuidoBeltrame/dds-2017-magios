@@ -14,9 +14,12 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import ar.indicadores.IExpresion;
 import ar.indicadores.IndicadoresLexer;
 import ar.indicadores.IndicadoresParser;
 import ar.indicadores.antlr.FormatoInvalidoErrorListener;
+import ar.indicadores.antlr.VisitorExp;
+import empresas.Empresa;
 
 @Entity
 @Table(name = "INDICADOR")
@@ -26,6 +29,7 @@ public class Indicador implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idIndicador;
 	private String nombre;
+	private String identificador;
 	private String formula;
 
 	public Indicador() {
@@ -49,6 +53,15 @@ public class Indicador implements Serializable{
 		this.nombre = nombre;
 	}
 
+	@Column(name = "identificador")
+	public String getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
+	
 	@Column(name = "formula")
 	public String getFormula() {
 		return formula;
@@ -84,4 +97,31 @@ public class Indicador implements Serializable{
 			throw new ParseCancellationException(errorListener.getErrorMessage());
 		}
 	}
+	
+	public double getResultado(Long codEmpresa, int anio) {
+
+		// Tomo el dato de la formula para calcular
+		String form = this.formula;
+
+		// Creo el lexer a partir de la formula
+		IndicadoresLexer lexer = new IndicadoresLexer(new ANTLRInputStream(form));
+
+		// Creo los tokens a partir del lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+		// Creo el parser a partir de los tokens
+		IndicadoresParser parser = new IndicadoresParser(tokens);
+
+		// Creo el arbol para el indicador
+		ParseTree tree = parser.indicador();
+
+		// Creo el visitor para recorrer
+		VisitorExp visitor = new VisitorExp(codEmpresa, anio);
+
+		// Obtengo la expresion a partir del visitor
+		IExpresion expresion = visitor.visit(tree);
+
+		return expresion.getResultado();
+	}
+
 }

@@ -19,12 +19,14 @@
 		<table class="table">
 		    <tr>
 		        <th>Indicador</th>
+		        <th>Indentificador</th>
 		        <th>Valor / Fórmula</th>		
 		    </tr>
 		       
 			<c:forEach var="list" items="${listaIndicadores}">
 				<tr>
 			        <td>${list.nombre}</td>
+                	<td>${list.identificador}</td>
                 	<td>${list.formula}</td>
             	</tr>
 			</c:forEach>

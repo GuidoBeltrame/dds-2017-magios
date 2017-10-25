@@ -56,10 +56,14 @@ public class IndicadoresController {
 		
 		String nombre = request.getParameter("nombre");
 		String formula = request.getParameter("formula");
+		
+		//Concateno i_ y elimino los espacios
+		String identificador = "i_"+ nombre.replace(" ", "");
 
 		Indicador indicador = new Indicador();
 		indicador.setNombre(nombre);
 		indicador.setFormula(formula);
+		indicador.setIdentificador(identificador);
 		
 		try {
 			indicador.validarFormula();

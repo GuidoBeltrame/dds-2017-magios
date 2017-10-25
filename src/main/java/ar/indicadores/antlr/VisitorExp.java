@@ -2,25 +2,40 @@ package ar.indicadores.antlr;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import ar.entidades.Indicador;
 import ar.indicadores.*;
-import empresas.Empresa;
+import ar.repositorio.CuentasRepositorio;
+import ar.repositorio.IndicadoresRepositorio;
+//import empresas.Empresa;
 
 public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 
+	private static final String PERSISTENCE_UNIT_NAME = "DB_MAGIOS";
+	private EntityManagerFactory emFactory;
+	private IndicadoresRepositorio indicadoresRepositorio;
+	private CuentasRepositorio cuentasRepositorio;
+	
 	private Map<String, IOperador> operadores;
 	private IExpresion expresionActual;
-	private Empresa empresa;
-	private int anio;
+	private Long codEmpresa;
+	private int periodo;
 
 	public VisitorExp() {
-
+		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		indicadoresRepositorio = new IndicadoresRepositorio(emFactory.createEntityManager());
+		cuentasRepositorio = new CuentasRepositorio(emFactory.createEntityManager());
 		this.cargarOperadores();
 	}
 
-	public VisitorExp(Empresa  empresa, int anio) {
-		this.anio = anio;
-		this.empresa = empresa;
-		this.cargarOperadores();
+	public VisitorExp(Long codEmpresa, int periodo) {
+		this();
+		this.periodo = periodo;
+		this.codEmpresa = codEmpresa;
+		//this.cargarOperadores();
 	}
 
 	private void cargarOperadores() {
@@ -71,11 +86,11 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 
 		if (ctx.getText().startsWith("-c")) {
 			// Es una Cuenta
-			valor = (-1) * obtenerValorCuenta(ctx.getText().split("-")[1], empresa, anio);
+			valor = (-1) * obtenerValorCuenta(ctx.getText().split("-")[1], codEmpresa, periodo);
 		} else {
 			if (ctx.getText().startsWith("-i")) {
 				// Es un Indicador
-				valor = (-1) * obtenerValorIndicador(ctx.getText().split("-")[1], empresa, anio);
+				valor = (-1) * obtenerValorIndicador(ctx.getText().split("-")[1], codEmpresa, periodo);
 			} else {
 				valor = Double.valueOf(ctx.getText());
 			}
@@ -99,11 +114,11 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 
 		if (ctx.getText().startsWith("c")) {
 			// Es una Cuenta
-			valor = obtenerValorCuenta(ctx.getText(), empresa, anio);
+			valor = obtenerValorCuenta(ctx.getText(), codEmpresa, periodo);
 		} else {
 			if (ctx.getText().startsWith("i")) {
 				// Es un Indicador
-				valor = obtenerValorIndicador(ctx.getText(), empresa, anio);
+				valor = obtenerValorIndicador(ctx.getText(), codEmpresa, periodo);
 			} else {
 				valor = Double.valueOf(ctx.getText());
 			}
@@ -120,11 +135,11 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 
 		if (ctx.getText().startsWith("c")) {
 			// Es una Cuenta
-			valor = obtenerValorCuenta(ctx.getText(), empresa, anio);
+			valor = obtenerValorCuenta(ctx.getText(), codEmpresa, periodo);
 		} else {
 			if (ctx.getText().startsWith("i")) {
 				// Es un Indicador
-				valor = obtenerValorIndicador(ctx.getText(), empresa, anio);
+				valor = obtenerValorIndicador(ctx.getText(), codEmpresa, periodo);
 			} else {
 				valor = Double.valueOf(ctx.getText());
 			}
@@ -133,20 +148,22 @@ public class VisitorExp extends IndicadoresBaseVisitor<IExpresion> {
 		return new Termino(valor);
 	}
 
-	private double obtenerValorIndicador(String codIndicador, Empresa empresa, int anio) {
+	private double obtenerValorIndicador(String identificadorIndicador, Long codEmpresa, int anio) {
 
 		// Llamar a persistencia, con codIndicador
-		// String formula = obtenerFormulaIndicador(codIndicador);
+		String formula = indicadoresRepositorio.obtenerFormulaIndicador(identificadorIndicador);
 
-		IndicadorPropio indicador = new IndicadorPropio("Indicador Propio 1", "1+2");
-
-		return indicador.getResultado(empresa, anio);
+		//IndicadorPropio indicador = new IndicadorPropio("Indicador Propio 1", "1+2");
+		Indicador indicador = new Indicador();
+		indicador.setFormula(formula);
+		
+		return indicador.getResultado(codEmpresa, anio);
 	}
 
-	private double obtenerValorCuenta(String codCuenta, Empresa empresa, int anio) {
+	private double obtenerValorCuenta(String identificadorCuenta, Long codEmpresa, int periodo) {
 
-		// Llamar a persistencia, con codCuenta, empresa y a�o
-		// return obtenerValorCuenta(codCuenta, empresa, anio);
-		return 6;
+		// Llamar a persistencia, con codCuenta, condEmpresa y periodo
+		 return cuentasRepositorio.obtenerValorCuenta(identificadorCuenta, codEmpresa, periodo);
+		//return 6;
 	}
 }

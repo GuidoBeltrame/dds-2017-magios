@@ -1,9 +1,11 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/tether/css/tether.min.css" type="text/css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/bootstrap/css/bootstrap-chosen.css" type="text/css">
 	<script src="<%=request.getContextPath()%>/tether/js/tether.min.js"></script>
 	<script src="<%=request.getContextPath()%>/jquery/jquery-3.2.1.slim.min.js"></script>
 	<script src="<%=request.getContextPath()%>/popper/popper.min.js"></script>
 	<script src="<%=request.getContextPath()%>/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/bootstrap/js/chosen.jquery.js"></script>
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <a class="navbar-brand" href="#"></a>
@@ -49,6 +51,7 @@
 	        <div class="dropdown-menu" aria-labelledby="dropDownMetodologias">
 	          <a class="dropdown-item" href="./crearMetodologia">Crear Metodología</a>
 	          <a class="dropdown-item" href="./metodologias">Ver Metodologías</a>
+	          <a class="dropdown-item" href="./aplicarMetodologia">Aplicar Metodología</a>
 	        </div>
 	      </li>
 	      <li class="nav-item dropdown">

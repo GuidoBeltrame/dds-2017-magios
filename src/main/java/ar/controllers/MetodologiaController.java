@@ -1,6 +1,7 @@
 package ar.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
@@ -11,11 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.entidades.Empresa;
+import ar.entidades.Indicador;
 import ar.entidades.Metodologia;
+import ar.entidades.Reporte;
+import ar.repositorio.EmpresasRepositorio;
 import ar.repositorio.MetodologiasRepositorio;
 
 @Controller
@@ -24,11 +31,13 @@ public class MetodologiaController {
 	private static final String PERSISTENCE_UNIT_NAME = "DB_MAGIOS";
 	private EntityManagerFactory emFactory;
 	private MetodologiasRepositorio metodologiasRepositorio;
+	private EmpresasRepositorio empresasRepositorio;
 	
 	public MetodologiaController() 
 	{
 		emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		metodologiasRepositorio = new MetodologiasRepositorio(emFactory.createEntityManager());
+		empresasRepositorio = new EmpresasRepositorio(emFactory.createEntityManager());
 	}
 	
 	@RequestMapping(value = "/metodologias")
@@ -98,5 +107,51 @@ public class MetodologiaController {
 	    mv.addObject("listaMetodologias", lista);
 
 	    return mv;
+	}
+	
+	@RequestMapping(value = "/aplicarMetodologia")
+	public ModelAndView aplicarMetodologia() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("aplicarMetodologia");
+		
+		List<Metodologia> listaMetodologias = metodologiasRepositorio.getMetodologias();
+		mv.addObject("listaMetodologias", listaMetodologias);
+		List<Empresa> listaEmpresas = empresasRepositorio.getEmpresas();
+		mv.addObject("listaEmpresas", listaEmpresas);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/aplicacionMetodologia")
+	protected ModelAndView aplicacionMetodologia(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String idMetodologia = request.getParameter("metodologia");
+		String[] empresas = request.getParameterValues("empresas");
+		
+		Empresa empresa = empresasRepositorio.buscarPorId((Long.parseLong(empresas[0])));
+		Metodologia metodologia = metodologiasRepositorio.buscarPorId((Long.parseLong(idMetodologia)));
+
+		Indicador indicador = new Indicador();
+		indicador.setFormula(metodologia.getFormula());
+		
+		double resultado = indicador.getResultado(Long.parseLong(empresas[0]), 2016);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("mostrarReporte");
+		
+		List<Reporte> listaReporte = new ArrayList<Reporte>();
+		
+		Reporte reporte = new Reporte();
+		reporte.setEmpresa(empresa.getNombre());
+		reporte.setMetodologia(metodologia.getNombre());
+		reporte.setPeriodo(2016);
+		reporte.setResultado(resultado);
+		
+		listaReporte.add(reporte);
+		
+		mv.addObject("listaReporte", listaReporte);
+
+		return mv;
 	}
 }

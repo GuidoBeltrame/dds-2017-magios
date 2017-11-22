@@ -128,27 +128,30 @@ public class MetodologiaController {
 
 		String idMetodologia = request.getParameter("metodologia");
 		String[] empresas = request.getParameterValues("empresas");
-		
-		Empresa empresa = empresasRepositorio.buscarPorId((Long.parseLong(empresas[0])));
+
 		Metodologia metodologia = metodologiasRepositorio.buscarPorId((Long.parseLong(idMetodologia)));
 
 		Indicador indicador = new Indicador();
 		indicador.setFormula(metodologia.getFormula());
-		
-		double resultado = indicador.getResultado(Long.parseLong(empresas[0]), 2016);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("mostrarReporte");
 		
 		List<Reporte> listaReporte = new ArrayList<Reporte>();
 		
-		Reporte reporte = new Reporte();
-		reporte.setEmpresa(empresa.getNombre());
-		reporte.setMetodologia(metodologia.getNombre());
-		reporte.setPeriodo(2016);
-		reporte.setResultado(resultado);
-		
-		listaReporte.add(reporte);
+		for (int i = 0; i < empresas.length; i++)
+		{
+			Empresa empresa = empresasRepositorio.buscarPorId((Long.parseLong(empresas[i])));			
+			double resultado = indicador.getResultado(Long.parseLong(empresas[i]), 2016);
+
+			Reporte reporte = new Reporte();
+			reporte.setEmpresa(empresa.getNombre());
+			reporte.setMetodologia(metodologia.getNombre());
+			reporte.setPeriodo(2016);
+			reporte.setResultado(resultado);
+			
+			listaReporte.add(reporte);
+		}
 		
 		mv.addObject("listaReporte", listaReporte);
 

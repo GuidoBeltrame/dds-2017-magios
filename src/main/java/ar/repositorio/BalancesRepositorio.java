@@ -21,11 +21,17 @@ public class BalancesRepositorio extends Repositorio {
 		em.getTransaction().commit();
 	}
 	
-	public int buscarBalance(Long idCuenta, Long idEmpresa, int periodo) {
+	public void update(Balance balance) {
+		em.getTransaction().begin();
+		em.merge(balance);
+		em.getTransaction().commit();
+	}
+	
+	public Balance buscarBalance(Long idCuenta, Long idEmpresa, int periodo) {
 		try {
-			TypedQuery<Integer> query = em.createQuery("SELECT 1 FROM Balance b WHERE b.cuenta.idCuenta = :idCuenta " +
+			TypedQuery<Balance> query = em.createQuery("SELECT b FROM Balance b WHERE b.cuenta.idCuenta = :idCuenta " +
 		                                               "AND b.empresa.idEmpresa = :idEmpresa " +
-					                                   "AND b.periodo = :periodo", Integer.class);
+					                                   "AND b.periodo = :periodo", Balance.class);
 		
 			query.setParameter("idCuenta", idCuenta);
 			query.setParameter("idEmpresa", idEmpresa);
@@ -34,7 +40,7 @@ public class BalancesRepositorio extends Repositorio {
 			return query.setMaxResults(1).getSingleResult();
 		}
 		catch (Exception ex) {
-			return 0;
+			return null;
 		}
 	}
 }

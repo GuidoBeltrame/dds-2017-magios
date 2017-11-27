@@ -127,16 +127,22 @@ public class ProcesosController {
 	    	repositorio.empresas().persistir(empresa);
 		}
 
-		int existeBalance = repositorio.balances().buscarBalance(cuenta.getIdCuenta(), empresa.getIdEmpresa(), Integer.parseInt(registro[2]));
+		Balance balance = repositorio.balances().buscarBalance(cuenta.getIdCuenta(), empresa.getIdEmpresa(), Integer.parseInt(registro[2]));
 		
-		if (existeBalance == 0) {
-			Balance balance = new Balance();
+		if (balance == null) {
+			balance = new Balance();
 			balance.setPeriodo(Integer.parseInt(registro[2]));
 			balance.setValor(Long.parseLong(registro[3]));
 			balance.setCuenta(cuenta);
 			balance.setEmpresa(empresa);
 			
 			repositorio.balances().persistir(balance);
+		}
+		else {
+			if (Long.parseLong(registro[3]) != balance.getValor()) {
+				balance.setValor(Long.parseLong(registro[3]));
+				repositorio.balances().update(balance);
+			}
 		}
 	}
 	

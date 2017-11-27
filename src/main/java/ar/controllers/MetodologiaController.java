@@ -128,6 +128,7 @@ public class MetodologiaController {
 
 		String idMetodologia = request.getParameter("metodologia");
 		String[] empresas = request.getParameterValues("empresas");
+		int periodo = Integer.parseInt(request.getParameter("anio"));
 
 		Metodologia metodologia = metodologiasRepositorio.buscarPorId((Long.parseLong(idMetodologia)));
 
@@ -147,7 +148,7 @@ public class MetodologiaController {
 			Reporte reporte = new Reporte();
 			reporte.setEmpresa(empresa.getNombre());
 			reporte.setMetodologia(metodologia.getNombre());
-			reporte.setPeriodo(2016);
+			reporte.setPeriodo(periodo);
 			reporte.setResultado(resultado);
 			
 			listaReporte.add(reporte);

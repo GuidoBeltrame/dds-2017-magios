@@ -1,12 +1,15 @@
 package ar.entidades;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -32,6 +35,9 @@ public class Indicador implements Serializable{
 	private String identificador;
 	private String formula;
 
+	@OneToMany(mappedBy = "indicador", cascade = CascadeType.ALL)
+	private Set<IndicadorEmpresa> indicadoresEmpresas;
+	
 	public Indicador() {
 	}
 
@@ -69,6 +75,14 @@ public class Indicador implements Serializable{
 
 	public void setFormula(String formula) {
 		this.formula = formula;
+	}
+	
+	public Set<IndicadorEmpresa> getIndicadoresEmpresas() {
+		return indicadoresEmpresas;
+	}
+
+	public void setIndicadoresEmpresas(Set<IndicadorEmpresa> indicadoresEmpresas) {
+		this.indicadoresEmpresas = indicadoresEmpresas;
 	}
 	
 //	public String toString() {

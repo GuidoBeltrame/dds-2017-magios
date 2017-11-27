@@ -54,12 +54,21 @@
 	          <a class="dropdown-item" href="./aplicarMetodologia">Aplicar Metodología</a>
 	        </div>
 	      </li>
+<!-- 	      <li class="nav-item dropdown"> -->
+<!-- 	        <a class="nav-link dropdown-toggle" id="dropDownBalances" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 	          Balances -->
+<!-- 	        </a> -->
+<!-- 	        <div class="dropdown-menu" aria-labelledby="dropDownBalances"> -->
+<!-- 	          <a class="dropdown-item" href="#">Buscar Balances</a> -->
+<!-- 	        </div> -->
+<!-- 	      </li> -->
 	      <li class="nav-item dropdown">
-	        <a class="nav-link dropdown-toggle" id="dropDownBalances" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          Balances
+	        <a class="nav-link dropdown-toggle" id="dropDownProcesos" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Procesos Batch
 	        </a>
-	        <div class="dropdown-menu" aria-labelledby="dropDownBalances">
-	          <a class="dropdown-item" href="#">Buscar Balances</a>
+	        <div class="dropdown-menu" aria-labelledby="dropDownProcesos">
+	          <a class="dropdown-item" href="./cargaCuentas">Carga de Cuentas</a>
+	          <a class="dropdown-item" href="./calculoIndicadores">Precálculo de Indicadores</a>
 	        </div>
 	      </li>
 	    </ul>

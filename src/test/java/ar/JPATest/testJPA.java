@@ -57,7 +57,7 @@ public class testJPA {
 		Balance balance = new Balance();
 		balance.setPeriodo(2016);
 		balance.setValor(14870000000L);
-		balance.setComuna(cuenta);
+		balance.setCuenta(cuenta);
 		balance.setEmpresa(empresa);
 		//balance.setEmpresa(empresa2);
 		

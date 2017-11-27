@@ -32,6 +32,15 @@
 				    </c:forEach>
 				</select>
 			</div>
+			<div class="form-group">
+				<label for="anio">Período a Aplicar:</label>
+				<select name="anio" id="anio" class="chosen-select-deselect form-control input-select">
+					<option value="0">Seleccione Período</option>
+					<option value="2015">2015</option>
+					<option value="2016">2016</option>
+					<option value="2017">2017</option>
+				</select>
+			</div>
 			<button type="submit" class="btn btn-primary">Aceptar</button>
 			<button type="button" class="btn btn-outline-primary" onclick="closeCreate()">Cancelar</button>		
 		</form>

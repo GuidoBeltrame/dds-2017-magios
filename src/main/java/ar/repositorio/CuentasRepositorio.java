@@ -43,15 +43,17 @@ public class CuentasRepositorio extends Repositorio{
 	
 	public double obtenerValorCuenta(String identificadorCuenta, Long codEmpresa, int periodo) {
 		try {
-			TypedQuery<Double> query = em.createQuery("SELECT b.valor FROM balance b, cuenta c "
-					+ "WHERE b.idCuenta = c.idCuenta "
+			TypedQuery<Double> query = em.createQuery("SELECT b.valor FROM Balance b, Cuenta c "
+					+ "WHERE b.cuenta.idCuenta = c.idCuenta "
 					+ "AND c.identificador = :identificadorCuenta "
-					+ "AND b.idEmpresa = :codEmpresa", double.class);
+					+ "AND b.periodo = :periodo "
+					+ "AND b.empresa.idEmpresa = :codEmpresa", Double.class);
 		
 			query.setParameter("identificadorCuenta", identificadorCuenta);
 			query.setParameter("codEmpresa", codEmpresa);
+			query.setParameter("periodo", periodo);
 			
-			return query.getSingleResult();
+			return query.setMaxResults(1).getSingleResult();
 		}
 		catch (Exception ex) {
 			return 0;

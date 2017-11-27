@@ -9,6 +9,8 @@ public class Repositorio {
 	private IndicadoresRepositorio indicadores;
 	private EmpresasRepositorio empresas;
 	private BalancesRepositorio balances;
+	private ProcesosRepositorio procesos;
+	private IndicadorEmpresaRepositorio indicadoresEmpresas;
 	
 	public Repositorio(EntityManager em) {
 		this.em = em;
@@ -44,6 +46,22 @@ public class Repositorio {
 		}
 		
 		return balances;
+	}
+	
+	public ProcesosRepositorio procesos() {
+		if (procesos == null) {
+			procesos = new ProcesosRepositorio(em);
+		}
+		
+		return procesos;
+	}
+	
+	public IndicadorEmpresaRepositorio indicadoresEmpresas() {
+		if (indicadoresEmpresas == null) {
+			indicadoresEmpresas = new IndicadorEmpresaRepositorio(em);
+		}
+		
+		return indicadoresEmpresas;
 	}
 	
 	public void cerrar() {

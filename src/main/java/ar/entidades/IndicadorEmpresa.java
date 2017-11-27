@@ -13,16 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "BALANCE")
-public class Balance implements Serializable {
+@Table(name = "INDICADOREMPRESA")
+public class IndicadorEmpresa implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idBalance;
+	private Long idIndicadorEmpresa;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idCuenta", referencedColumnName = "idCuenta")
-	private Cuenta cuenta;
+	@JoinColumn(name = "idIndicador", referencedColumnName = "idIndicador")
+	private Indicador indicador;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idEmpresa", referencedColumnName = "idEmpresa")
@@ -31,25 +31,22 @@ public class Balance implements Serializable {
 	private int periodo;
 	
 	private double valor;
-	
-	public Balance() {
+
+	@Column(name = "idIndicadorEmpresa")
+	public Long getIdIndicadorEmpresa() {
+		return idIndicadorEmpresa;
 	}
 
-	@Column(name = "idBalance")
-	public Long getIdBalance() {
-		return idBalance;
+	public void setIdIndicadorEmpresa(Long idIndicadorEmpresa) {
+		this.idIndicadorEmpresa = idIndicadorEmpresa;
 	}
 
-	public void setIdBalance(Long id) {
-		this.idBalance = id;
+	public Indicador getIndicador() {
+		return indicador;
 	}
 
-	public Cuenta getCuenta() {
-		return cuenta;
-	}
-
-	public void setCuenta(Cuenta cuenta) {
-		this.cuenta = cuenta;
+	public void setIndicador(Indicador indicador) {
+		this.indicador = indicador;
 	}
 
 	public Empresa getEmpresa() {
@@ -59,7 +56,7 @@ public class Balance implements Serializable {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-	
+
 	public int getPeriodo() {
 		return periodo;
 	}

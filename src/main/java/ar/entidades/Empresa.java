@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,9 @@ public class Empresa implements Serializable {
 
 	@OneToMany(mappedBy = "empresa")
 	private Set<Balance> balances;
+	
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	private Set<IndicadorEmpresa> indicadoresEmpresas;
 	
 	public Empresa() {
 	}
@@ -54,8 +58,16 @@ public class Empresa implements Serializable {
 		return balances;
 	}
 
-	public void setPois(Set<Balance> balances) {
+	public void setBalances(Set<Balance> balances) {
 		this.balances = balances;
+	}
+
+	public Set<IndicadorEmpresa> getIndicadoresEmpresas() {
+		return indicadoresEmpresas;
+	}
+
+	public void setIndicadoresEmpresas(Set<IndicadorEmpresa> indicadoresEmpresas) {
+		this.indicadoresEmpresas = indicadoresEmpresas;
 	}
 
 	public void addBalance(Balance balance) {
